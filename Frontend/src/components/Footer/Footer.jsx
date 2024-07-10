@@ -5,7 +5,7 @@ import MobileApp from "../MobileApp/MobileApp";
 
 const Footer = () => {
   return (
-    <div className="footer">
+    <div className="footer" id="footer">
       <div className="footer-content">
         <div className="footer-content-left">
           <img className="logo" src={assets.logo} alt="img of chewster logo" />

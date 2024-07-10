@@ -1,46 +1,66 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("Home");
 
   return (
     <div className="navbar">
-      <img src={assets.logo} alt="Picture of Chewster Logo" className="logo" />
+      <Link to="/">
+        <img
+          src={assets.logo}
+          alt="Picture of Chewster Logo"
+          className="logo"
+        />
+      </Link>
+
       <ul className="navbar-menu">
-        <li
+        <Link
+          to="/"
           onClick={() => setMenu("Home")}
           className={menu === "Home" ? "active" : ""}
         >
           Home
-        </li>
-        <li
+        </Link>
+        <a
+          href="#explore-menu"
           onClick={() => setMenu("Menu")}
           className={menu === "Menu" ? "active" : ""}
         >
           Menu
-        </li>
-        <li
+        </a>
+        <a
+          href="#mobile-app"
           onClick={() => setMenu("Mobile-App")}
           className={menu === "Mobile-App" ? "active" : ""}
         >
           Mobile-App
-        </li>
-        <li
+        </a>
+        <a
+          href="#footer"
           onClick={() => setMenu("About-Us")}
           className={menu === "About-Us" ? "active" : ""}
         >
           About Us
-        </li>
+        </a>
       </ul>
       <div className="navbar-right">
         <img src={assets.search_icon} alt="search-icon" />
         <div className="navbar-search-icon">
-          <img src={assets.basket_icon} alt="cart basket img" />
+          <Link to="/cart">
+            <img src={assets.basket_icon} alt="cart basket img" />
+          </Link>
           <div className="dot"></div>
         </div>
-        <button>Sign In</button>
+        <button
+          onClick={() => {
+            setShowLogin(true);
+          }}
+        >
+          Sign In
+        </button>
       </div>
     </div>
   );
