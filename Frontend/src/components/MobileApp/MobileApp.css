@@ -1,0 +1,21 @@
+.mobile-app {
+  font-size: 18px;
+  text-align: start;
+  font-weight: 100px;
+}
+
+.mobile-app-downloads {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.mobile-app-downloads img {
+  width: 150px;
+  max-width: 180px;
+  cursor: pointer;
+}
+
+.mobile-app-downloads img:hover {
+  transform: scale(1.05);
+}
