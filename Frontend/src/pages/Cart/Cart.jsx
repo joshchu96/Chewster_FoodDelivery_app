@@ -3,17 +3,10 @@ import "./Cart.css";
 import { ChewsterContext } from "../../context/ChewsterContext";
 
 const Cart = () => {
-  const { cartItems, food_list, removeFromCart } = useContext(ChewsterContext);
+  const { cartItems, food_list, removeFromCart, addToCart, calcCartTotal } =
+    useContext(ChewsterContext);
 
-  const calculateSubtotal = () => {
-    return food_list.reduce((acc, item) => {
-      return acc + item.price * (cartItems[item._id] || 0);
-    }, 0);
-  };
-
-  const subtotal = calculateSubtotal();
-  const deliveryFees = 3.99;
-  const total = subtotal + deliveryFees;
+  const deliveryFee = 2.99;
 
   return (
     <div className="cart">
@@ -24,62 +17,69 @@ const Cart = () => {
           <p>Price</p>
           <p>Quantity</p>
           <p>Total Price</p>
-          <p>Remove</p>
         </div>
         <br />
         <hr />
-        {food_list.map((item, index) => {
+        {food_list.map((item, idx) => {
           if (cartItems[item._id] > 0) {
             return (
-              <div key={index}>
+              <div key={idx}>
                 <div className="cart-items-title cart-items-item">
-                  <img src={item.image} alt="picture of food in cart" />
+                  <img src={item.image} />
                   <p>{item.name}</p>
                   <p>${item.price}</p>
-                  <p>{cartItems[item._id]}</p>
+                  <div className="item-counter-wrapper">
+                    <span
+                      onClick={() => removeFromCart(item._id)}
+                      className="cart-minus-btn"
+                    >
+                      -
+                    </span>
+                    <span className="num">{cartItems[item._id]}</span>
+                    <span
+                      onClick={() => addToCart(item._id)}
+                      className="cart-add-btn"
+                    >
+                      +
+                    </span>
+                  </div>
+
                   <p>${item.price * cartItems[item._id]}</p>
-                  <p
-                    onClick={() => {
-                      removeFromCart(item._id);
-                    }}
-                    className="x"
-                  >
-                    x
-                  </p>
                 </div>
                 <hr />
               </div>
             );
           }
-          return null;
         })}
       </div>
-      <div className="cart-summary-container">
-        <div className="cart-summary">
+      <div className="cart-total-wrapper">
+        <div className="cart-total">
           <h2>Cart Summary</h2>
-          <div>
-            <div className="cart-summary-details">
-              <p>Subtotal</p>
-              <p>${subtotal.toFixed(2)}</p>
-            </div>
+          <div className="cart-total-details">
+            <p>Total before Fees</p>
+            <p>${calcCartTotal()}</p>
           </div>
           <hr />
-          <div>
-            <div className="cart-summary-details">
-              <p>Delivery Fees</p>
-              <p>${deliveryFees.toFixed(2)}</p>
-            </div>
+          <div className="cart-total-details">
+            <p>Delivery Fee</p>
+            <p>${deliveryFee}</p>
           </div>
           <hr />
+          <div className="cart-total-details">
+            <b>Total</b>
+            <b>${(calcCartTotal() + deliveryFee).toFixed(2)}</b>
+          </div>
+          <button>PROCEED TO CHECKOUT</button>
+        </div>
+        <div className="cart-promocode">
           <div>
-            <div className="cart-summary-details">
-              <b>Total</b>
-              <b>${total.toFixed(2)}</b>
+            <p>Enter promo here</p>
+            <div className="cart-promocode-input">
+              <input type="text" placeholder="promo code" />
+              <button>Submit</button>
             </div>
-            <button>PROCEED TO ORDER PAYMENT</button>
           </div>
         </div>
-        <div className="cart-promo"></div>
       </div>
     </div>
   );

@@ -27,12 +27,25 @@ const ChewsterContextProvider = (props) => {
     }));
   };
 
+  //calculate total cart amt
+  const calcCartTotal = () => {
+    let totalAmt = 0;
+    for (let item in cartItems) {
+      if (cartItems[item] > 0) {
+        let itemDetail = food_list.find((food) => food._id === item);
+        totalAmt += itemDetail.price * cartItems[item];
+      }
+    }
+    return totalAmt;
+  };
+
   const contextValue = {
     food_list,
     cartItems,
     setCartItems,
     addToCart,
     removeFromCart,
+    calcCartTotal,
   };
 
   return (

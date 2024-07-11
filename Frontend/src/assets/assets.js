@@ -127,7 +127,7 @@ export const food_list = [
   },
   {
     _id: "2",
-    name: "Veg salad",
+    name: "Garden Fresh Mix",
     image: food_2,
     price: 18,
     description:
@@ -158,7 +158,7 @@ export const food_list = [
     image: food_5,
     price: 14,
     description:
-      "Food provides essential nutrients for overall health and well-being",
+      "Savor our Lasagna Rolls: tender pasta sheets rolled with rich ricotta, savory ground beef (or vegetarian filling), and signature marinara sauce, topped with melted mozzarella, delivered fresh and hot!",
     category: "Rolls",
   },
   {
@@ -167,7 +167,7 @@ export const food_list = [
     image: food_6,
     price: 12,
     description:
-      "Food provides essential nutrients for overall health and well-being",
+      "Spicy Peri Peri chicken (or veggie option) wrapped in a soft roll with crisp lettuce and juicy tomatoes, delivering bold flavors to your doorstep!",
     category: "Rolls",
   },
   {
@@ -176,25 +176,25 @@ export const food_list = [
     image: food_7,
     price: 20,
     description:
-      "Food provides essential nutrients for overall health and well-being",
+      "Tender chicken wrapped in a soft, savory roll, a delicious choice for any occasion!",
     category: "Rolls",
   },
   {
     _id: "8",
-    name: "Veg Rolls",
+    name: "Vegetarian Rolls",
     image: food_8,
     price: 15,
     description:
-      "Food provides essential nutrients for overall health and well-being",
+      "Delight in our veggie rolls: fresh, flavorful vegetables wrapped in a soft, savory roll, perfect for a tasty and satisfying meal!",
     category: "Rolls",
   },
   {
     _id: "9",
-    name: "Ripple Ice Cream",
+    name: "Raspberry Sorbet Ice Cream",
     image: food_9,
     price: 14,
     description:
-      "Food provides essential nutrients for overall health and well-being",
+      "Indulge in the luscious blend of creamy vanilla ice cream infused with tangy raspberry swirls, offering a refreshing burst of fruity sweetness with every spoonful.",
     category: "Deserts",
   },
   {

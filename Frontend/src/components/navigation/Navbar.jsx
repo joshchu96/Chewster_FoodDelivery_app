@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
 import { Link } from "react-router-dom";
+import { ChewsterContext } from "../../context/ChewsterContext";
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("Home");
+
+  const { calcCartTotal } = useContext(ChewsterContext);
 
   return (
     <div className="navbar">
@@ -52,7 +55,7 @@ const Navbar = ({ setShowLogin }) => {
           <Link to="/cart">
             <img src={assets.basket_icon} alt="cart basket img" />
           </Link>
-          <div className="dot"></div>
+          <div className={calcCartTotal() === 0 ? "" : "dot"}></div>
         </div>
         <button
           onClick={() => {
