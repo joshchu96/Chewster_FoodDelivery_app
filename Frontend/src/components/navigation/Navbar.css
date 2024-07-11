@@ -24,10 +24,11 @@
 }
 
 .navbar button {
-  background: transparent;
+  background: #a3e0a3;
   font-size: 20px;
   color: #49557e;
-  border: 1px solid green;
+  border: none;
+
   padding: 10px 30px;
   border-radius: 50px;
   cursor: pointer;

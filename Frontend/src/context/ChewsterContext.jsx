@@ -39,6 +39,8 @@ const ChewsterContextProvider = (props) => {
     return totalAmt;
   };
 
+  const deliveryFee = 2.99;
+
   const contextValue = {
     food_list,
     cartItems,
@@ -46,6 +48,7 @@ const ChewsterContextProvider = (props) => {
     addToCart,
     removeFromCart,
     calcCartTotal,
+    deliveryFee,
   };
 
   return (

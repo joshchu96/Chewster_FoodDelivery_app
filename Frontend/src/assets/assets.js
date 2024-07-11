@@ -235,29 +235,29 @@ export const food_list = [
   },
   {
     _id: "14",
-    name: "Vegan Sandwich",
+    name: "BLT Sandwich",
     image: food_14,
     price: 18,
     description:
-      "Food provides essential nutrients for overall health and well-being",
+      "Savor our classic BLT Sandwich, crafted with crispy bacon, fresh lettuce, juicy tomatoes, and creamy mayo, nestled between slices of toasted bread for a timeless flavor combination.",
     category: "Sandwich",
   },
   {
     _id: "15",
-    name: "Grilled Sandwich",
+    name: "Avocado Sandwich",
     image: food_15,
     price: 16,
     description:
-      "Food provides essential nutrients for overall health and well-being",
+      "Enjoy our Avocado Sandwich, featuring creamy avocado slices paired with fresh vegetables, tangy dressing, and hearty whole-grain bread for a satisfying and nutritious meal option.",
     category: "Sandwich",
   },
   {
     _id: "16",
-    name: "Bread Sandwich",
+    name: "Banh Mi Sandwich",
     image: food_16,
     price: 24,
     description:
-      "Food provides essential nutrients for overall health and well-being",
+      "A fusion of French-inspired baguette and Vietnamese flavors, our Banh Mi Sandwich boasts savory meats or tofu, pickled vegetables, fresh cilantro, and spicy mayo, delivering a delightful burst of taste in every bite.",
     category: "Sandwich",
   },
   {

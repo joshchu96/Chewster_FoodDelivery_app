@@ -1,12 +1,19 @@
 import React, { useContext } from "react";
 import "./Cart.css";
 import { ChewsterContext } from "../../context/ChewsterContext";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const { cartItems, food_list, removeFromCart, addToCart, calcCartTotal } =
-    useContext(ChewsterContext);
+  const {
+    cartItems,
+    food_list,
+    removeFromCart,
+    addToCart,
+    calcCartTotal,
+    deliveryFee,
+  } = useContext(ChewsterContext);
 
-  const deliveryFee = 2.99;
+  const navigate = useNavigate();
 
   return (
     <div className="cart">
@@ -69,7 +76,9 @@ const Cart = () => {
             <b>Total</b>
             <b>${(calcCartTotal() + deliveryFee).toFixed(2)}</b>
           </div>
-          <button>PROCEED TO CHECKOUT</button>
+          <button onClick={() => navigate("/order")}>
+            PROCEED TO CHECKOUT
+          </button>
         </div>
         <div className="cart-promocode">
           <div>
