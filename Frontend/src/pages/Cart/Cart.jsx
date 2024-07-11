@@ -69,20 +69,25 @@ const Cart = () => {
           <hr />
           <div className="cart-total-details">
             <p>Delivery Fee</p>
-            <p>${deliveryFee}</p>
+            <p>${calcCartTotal() === 0 ? 0 : deliveryFee}</p>
           </div>
           <hr />
           <div className="cart-total-details">
             <b>Total</b>
-            <b>${(calcCartTotal() + deliveryFee).toFixed(2)}</b>
+            <b>
+              $
+              {calcCartTotal === 0
+                ? 0
+                : (calcCartTotal() + deliveryFee).toFixed(2)}
+            </b>
           </div>
           <button onClick={() => navigate("/order")}>
-            PROCEED TO CHECKOUT
+            Proceed to Checkout
           </button>
         </div>
         <div className="cart-promocode">
           <div>
-            <p>Enter promo here</p>
+            <p>Enter Promo Code Here</p>
             <div className="cart-promocode-input">
               <input type="text" placeholder="promo code" />
               <button>Submit</button>

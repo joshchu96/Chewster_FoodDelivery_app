@@ -12,7 +12,7 @@
 
 .order-left .title {
   font-size: 30px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 30px;
 }
 
@@ -36,6 +36,8 @@
 }
 
 .order-right button {
-  width: 10vw;
-  padding: 10px 5px;
+  width: 11vw;
+  padding: 10px 10px;
+  font-size: larger;
+  font-family: "Times New Roman", Times, serif;
 }

@@ -4,7 +4,7 @@
 
 .cart hr {
   height: 1px;
-  background-color: #a3e0a3;
+  background-color: #0a7d5a;
   border: none;
 }
 
@@ -12,7 +12,7 @@
   display: grid;
   grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 0.5fr;
   align-items: center;
-  color: #6dba9f;
+  color: #49557e;
   font-size: max(1vw, 15px);
 }
 
@@ -65,6 +65,10 @@
   gap: 20px;
 }
 
+.cart-total h2 {
+  font-weight: 600;
+}
+
 .cart-total-details {
   display: flex;
   justify-content: space-between;
@@ -77,13 +81,15 @@
 
 .cart-total button {
   border: none;
-  color: #49557e;
-  background-color: #a3e0a3;
+  color: white;
+  background-color: #0a7d5a;
   width: 12vw;
   height: 5vh;
   padding: 10px 0px;
   border-radius: 5px;
   cursor: pointer;
+  font-size: larger;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .cart-total-wrapper .cart-promocode {
@@ -111,11 +117,13 @@
 }
 
 .cart-total-wrapper .cart-promocode-input button {
+  font-size: larger;
   width: 10vw;
   padding: 10px 5px;
-  background-color: #a3e0a3;
+  background-color: #0a7d5a;
   border: none;
-  color: #49557e;
+  color: white;
   border-radius: 5px;
   cursor: pointer;
+  font-family: "Times New Roman", Times, serif;
 }

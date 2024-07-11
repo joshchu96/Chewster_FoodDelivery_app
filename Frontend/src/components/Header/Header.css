@@ -22,6 +22,7 @@
   font-weight: 400;
   color: white;
   font-size: max(4vw, 25px);
+  font-family: "Times New Roman", Times, serif;
 }
 
 .header-contents p {
@@ -31,10 +32,17 @@
 
 .header-contents button {
   border: none;
-  color: #118711;
+  color: white;
   font-weight: 400;
   padding: 1vw 2.3vw;
-  background-color: white;
+  background-color: #0a7d5a;
   font-size: max(1vw, 13px);
   border-radius: 15px;
+  cursor: pointer;
+  font-family: "Times New Roman", Times, serif;
+}
+.header-contents button:hover {
+  background-color: rgb(78, 143, 124);
+  transition: 0.5s;
+  color: white;
 }

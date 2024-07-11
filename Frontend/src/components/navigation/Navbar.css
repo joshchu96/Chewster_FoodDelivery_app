@@ -24,19 +24,20 @@
 }
 
 .navbar button {
-  background: #a3e0a3;
+  background: #0a7d5a;
   font-size: 20px;
-  color: #49557e;
+  color: white;
   border: none;
+  font-family: "Times New Roman", Times, serif;
 
   padding: 10px 30px;
-  border-radius: 50px;
+  border-radius: 5px;
   cursor: pointer;
   transition: 0.5s;
 }
 
 .navbar button:hover {
-  background-color: #a3e0a3;
+  background-color: rgb(78, 143, 124);
 }
 
 .navbar .active {
@@ -56,7 +57,7 @@
   position: absolute;
   min-width: 10px;
   min-height: 10px;
-  background-color: #a3e0a3;
+  background-color: rgb(78, 143, 124);
   border-radius: 5px;
   top: -8px;
   right: -8px;

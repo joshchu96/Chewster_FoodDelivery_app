@@ -46,10 +46,10 @@
 .explore-menu hr {
   margin: 10px 0px;
   height: 2px;
-  background-color: #118711;
+  background-color: #0a7d5a;
   border: none;
 }
 
 .explore-menu-list-item .active {
-  border: 5px solid #a3e0a3;
+  border: 5px solid rgb(78, 143, 124);
 }
