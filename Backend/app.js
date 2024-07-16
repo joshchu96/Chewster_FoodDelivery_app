@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import foodRouter from "./routes/foodRoute.js";
 import userRouter from "./routes/userRoute.js";
+import cartRouter from "./routes/cartRoute.js";
 
 const app = express();
 
@@ -16,5 +17,7 @@ app.use("/chewster-api/food", foodRouter);
 app.use("/food-images", express.static("uploads"));
 
 app.use("/chewster-api/user", userRouter);
+
+app.use("/chewster-api/cart", cartRouter);
 
 export default app;

@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-//import { food_list } from "../assets/assets";
+import { food_list } from "../assets/assets";
 
 export const ChewsterContext = createContext(null);
 
@@ -8,7 +8,6 @@ const ChewsterContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const BASE_URL = "http://localhost:4000";
   const [token, setToken] = useState("");
-  const [food_list, setFood_list] = useState([]);
 
   const addToCart = (itemId) => {
     if (!cartItems[itemId]) {
@@ -45,20 +44,10 @@ const ChewsterContextProvider = (props) => {
 
   const deliveryFee = 2.99;
 
-  const fetchFoodList = async () => {
-    const response = await axios.get(BASE_URL + "/chewster-api/food/list");
-    setFood_list(response.data.data);
-  };
-
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setToken(localStorage.getItem("token"));
     }
-
-    async function loadData() {
-      await fetchFoodList();
-    }
-    loadData();
   }, []);
 
   const contextValue = {
