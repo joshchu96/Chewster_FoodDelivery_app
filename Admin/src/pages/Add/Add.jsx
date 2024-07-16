@@ -4,9 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const Add = () => {
-  const BASE_URL = "http://localhost:4000";
-
+const Add = ({ url }) => {
   const [image, setImage] = useState(false);
   const [data, setData] = useState({
     name: "",
@@ -36,7 +34,7 @@ const Add = () => {
     const formData = dataToChewster();
     try {
       const response = await axios.post(
-        `${BASE_URL}/chewster-api/food/add`,
+        `${url}/chewster-api/food/add`,
         formData
       );
       if (response.data.success) {

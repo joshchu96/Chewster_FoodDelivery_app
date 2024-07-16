@@ -1,13 +1,50 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Login.css";
 import { assets } from "../../assets/assets";
+import { ChewsterContext } from "../../context/ChewsterContext";
+import axios from "axios";
 
 const Login = ({ setShowLogin }) => {
+  const { BASE_URL, token, setToken } = useContext(ChewsterContext);
+
   const [state, setState] = useState("Log In");
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleOnChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    let newUrl = BASE_URL;
+
+    if (state === "Log In") {
+      newUrl += "/chewster-api/user/login";
+    } else {
+      newUrl += "/chewster-api/user/register";
+    }
+
+    const response = await axios.post(newUrl, data);
+
+    if (response.data.success) {
+      setToken(response.data.token);
+      localStorage.setItem("token", response.data.token);
+      setShowLogin(false);
+    } else {
+      alert(response.data.message);
+    }
+  };
 
   return (
     <div className="login-pop">
-      <form className="login-pop-container">
+      <form className="login-pop-container" onSubmit={handleLogin}>
         <div className="login-pop-title">
           <h2>{state}</h2>
           <img
@@ -21,21 +58,39 @@ const Login = ({ setShowLogin }) => {
             <></>
           ) : (
             <>
-              <label htmlFor="first-name">First Name</label>
-              <input id="first-name" type="text" required />
-
-              <label htmlFor="last-name">Last Name</label>
-              <input id="last-name" type="text" required />
+              <label htmlFor="name">Name</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                onChange={handleOnChange}
+                value={data.name}
+              />
             </>
           )}
 
           <label htmlFor="email">Email</label>
-          <input id="email" type="email" required />
+          <input
+            id="email"
+            type="email"
+            required
+            name="email"
+            onChange={handleOnChange}
+          />
 
           <label htmlFor="password">Password</label>
-          <input id="password" type="password" required />
+          <input
+            id="password"
+            type="password"
+            required
+            name="password"
+            onChange={handleOnChange}
+          />
         </div>
-        <button>{state === "Sign Up" ? "Sign Up" : "Sign In"}</button>
+        <button type="submit">
+          {state === "Sign Up" ? "Create Account" : "Sign In"}
+        </button>
 
         {state === "Sign Up" && (
           <div className="login-popup-condition">

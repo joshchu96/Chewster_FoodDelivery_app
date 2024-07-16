@@ -5,13 +5,12 @@ import axios from "axios";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
-const Display_Items = () => {
-  const BASE_URL = "http://localhost:4000";
+const Display_Items = ({ url }) => {
   const [list, setList] = useState([]);
 
   const fetchList = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/chewster-api/food/list`);
+      const response = await axios.get(`${url}/chewster-api/food/list`);
       if (response.data.success) {
         const fetchedList = response.data.data;
         setList(fetchedList);
@@ -36,7 +35,7 @@ const Display_Items = () => {
   const removeFood = async (id) => {
     try {
       const response = await axios.delete(
-        `${BASE_URL}/chewster-api/food/remove-food/${id}`
+        `${url}/chewster-api/food/remove-food/${id}`
       );
       if (response.data.success) {
         toast.success("Food item deleted successfully");
@@ -69,7 +68,7 @@ const Display_Items = () => {
         {list.map((item, index) => {
           return (
             <div key={index} className="list-table-format">
-              <img src={`${BASE_URL}/food-images/` + item.image} alt="" />
+              <img src={`${url}/food-images/` + item.image} alt="" />
               <p>{item.name}</p>
               <p>{item.category}</p>
               <p>${item.price}</p>
