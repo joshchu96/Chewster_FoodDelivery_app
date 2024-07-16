@@ -1,0 +1,26 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column; /* Stack the items vertically */
+  align-items: center; /* Center the items horizontally */
+}
+
+.navbar .logo {
+  width: 300px;
+}
+
+.navbar .admin_icon {
+  width: 120px;
+  margin-top: -10px;
+  margin-left: 10px;
+}
+
+.navbar .profile {
+  width: 50px;
+}
