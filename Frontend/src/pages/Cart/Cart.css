@@ -92,6 +92,11 @@
   font-family: "Times New Roman", Times, serif;
 }
 
+.cart-total button:hover {
+  background-color: rgb(78, 143, 124);
+  transition: 0.3s;
+}
+
 .cart-total-wrapper .cart-promocode {
   flex: 1;
 }
@@ -126,4 +131,9 @@
   border-radius: 5px;
   cursor: pointer;
   font-family: "Times New Roman", Times, serif;
+}
+
+.cart-total-wrapper .cart-promocode-input button:hover {
+  background-color: rgb(78, 143, 124);
+  transition: 0.3s;
 }

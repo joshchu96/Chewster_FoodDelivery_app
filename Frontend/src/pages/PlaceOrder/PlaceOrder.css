@@ -22,7 +22,7 @@
   padding: 12px;
   border: 1px solid #c5c5c5;
   border-radius: 3px;
-  outline-color: #a3e0a3;
+  outline-color: #0a7d5a;
 }
 
 .order-left .order-input-fields {
@@ -40,4 +40,9 @@
   padding: 10px 10px;
   font-size: larger;
   font-family: "Times New Roman", Times, serif;
+}
+
+.order-right button:hover {
+  background-color: rgb(78, 143, 124);
+  transition: 0.3s;
 }

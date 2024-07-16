@@ -9,7 +9,6 @@
 .sidebar-options-container {
   padding-top: 30px;
   padding-left: 15px;
-
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -21,15 +20,16 @@
   gap: 10px;
   border: 1px solid #0a7d5a;
   border-right: 0px;
-  padding: 8px 10px;
+  padding: 10px 10px;
   border-radius: 5px 0px 0px 5px;
   cursor: pointer;
 }
 
 .sidebar-option.active {
-  background-color: #a3e0a3;
-  border-top: 2px solid #0a7d5a;
-  border-left: 2px solid #0a7d5a;
-  border-bottom: 2px solid #0a7d5a;
-  border-right: 30px solid #0a7d5a;
+  background-color: #0a7d5a;
+  border-top: 3px solid rgb(78, 143, 124);
+  border-left: 3px solid rgb(78, 143, 124);
+  border-bottom: 3px solid rgb(78, 143, 124);
+  border-right: 2px solid rgb(78, 143, 124);
+  color: white;
 }

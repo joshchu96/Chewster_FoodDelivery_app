@@ -27,6 +27,6 @@ foodRouter.post("/add", upload.single("image"), addFood); //upload middleware to
 foodRouter.get("/list", displayFood);
 
 //DEL: remove food from the db.
-foodRouter.delete("/:id", deleteFood);
+foodRouter.delete("/remove-food/:id", deleteFood);
 
 export default foodRouter;

@@ -90,7 +90,7 @@ export const menu_list = [
     menu_image: menu_2,
   },
   {
-    menu_name: "Deserts",
+    menu_name: "Desserts",
     menu_image: menu_3,
   },
   {
@@ -102,7 +102,7 @@ export const menu_list = [
     menu_image: menu_5,
   },
   {
-    menu_name: "Pure Veg",
+    menu_name: "Vegan",
     menu_image: menu_6,
   },
   {
@@ -195,7 +195,7 @@ export const food_list = [
     price: 14,
     description:
       "Indulge in the luscious blend of creamy vanilla ice cream infused with tangy raspberry swirls, offering a refreshing burst of fruity sweetness with every spoonful.",
-    category: "Deserts",
+    category: "Desserts",
   },
   {
     _id: "10",
@@ -204,7 +204,7 @@ export const food_list = [
     price: 22,
     description:
       "Food provides essential nutrients for overall health and well-being",
-    category: "Deserts",
+    category: "Desserts",
   },
   {
     _id: "11",
@@ -213,7 +213,7 @@ export const food_list = [
     price: 10,
     description:
       "Food provides essential nutrients for overall health and well-being",
-    category: "Deserts",
+    category: "Desserts",
   },
   {
     _id: "12",
@@ -222,7 +222,7 @@ export const food_list = [
     price: 12,
     description:
       "Food provides essential nutrients for overall health and well-being",
-    category: "Deserts",
+    category: "Desserts",
   },
   {
     _id: "13",
@@ -303,7 +303,7 @@ export const food_list = [
     price: 14,
     description:
       "Food provides essential nutrients for overall health and well-being",
-    category: "Pure Veg",
+    category: "Vegan",
   },
   {
     _id: "22",
@@ -312,7 +312,7 @@ export const food_list = [
     price: 22,
     description:
       "Food provides essential nutrients for overall health and well-being",
-    category: "Pure Veg",
+    category: "Vegan",
   },
   {
     _id: "23",
@@ -321,7 +321,7 @@ export const food_list = [
     price: 10,
     description:
       "Food provides essential nutrients for overall health and well-being",
-    category: "Pure Veg",
+    category: "Vegan",
   },
   {
     _id: "24",
@@ -330,7 +330,7 @@ export const food_list = [
     price: 12,
     description:
       "Food provides essential nutrients for overall health and well-being",
-    category: "Pure Veg",
+    category: "Vegan",
   },
   {
     _id: "25",

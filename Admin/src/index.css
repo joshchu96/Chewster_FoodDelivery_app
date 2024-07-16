@@ -24,3 +24,17 @@ hr {
 .app-content {
   display: flex;
 }
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.cursor:hover {
+  text-decoration: underline;
+}

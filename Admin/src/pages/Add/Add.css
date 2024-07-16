@@ -1,0 +1,59 @@
+.add {
+  width: 70%;
+  margin-left: 5vw;
+  margin-top: 50px;
+  font-size: 20px;
+}
+
+.add form {
+  gap: 20px;
+}
+
+.add-image-upload img {
+  max-width: 150px;
+  cursor: pointer;
+}
+
+.add-food-name,
+.add-food-desc {
+  width: 40%;
+}
+
+.add-food-name input,
+.add-food-desc textarea {
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 2px solid #0a7d5a;
+}
+
+.add-category-price {
+  display: flex;
+  gap: 30px;
+}
+
+.add-category-price select,
+.add-category-price input {
+  max-width: 120px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #0a7d5a;
+  font-size: 15px;
+}
+
+.add-btn {
+  width: 150px;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #0a7d5a;
+  font-size: 15px;
+  color: white;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: rgb(78, 143, 124);
+  transition: 0.3s;
+}

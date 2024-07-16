@@ -57,8 +57,8 @@
 }
 
 .login-pop-container button:hover {
-  background-color: #a3e0a3;
-  color: #49557e;
+  background-color: rgb(78, 143, 124);
+  color: white;
   transition: 0.3s;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .login-pop-container p span:hover {
-  color: #a3e0a3;
+  color: rgb(78, 143, 124);
   cursor: pointer;
   transition: 0.3s;
 }
