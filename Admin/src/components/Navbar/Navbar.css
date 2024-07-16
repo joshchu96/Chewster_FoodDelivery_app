@@ -22,5 +22,10 @@
 }
 
 .navbar .profile {
-  width: 50px;
+  width: 70px;
+  height: 70px;
+  border: 2px solid #0a7d5a;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
 }
