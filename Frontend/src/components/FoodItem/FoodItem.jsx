@@ -4,12 +4,17 @@ import { assets } from "../../assets/assets";
 import { ChewsterContext } from "../../context/ChewsterContext";
 
 const FoodItem = ({ id, name, price, description, image }) => {
-  const { cartItems, addToCart, removeFromCart } = useContext(ChewsterContext);
+  const { cartItems, addToCart, removeFromCart, BASE_URL } =
+    useContext(ChewsterContext);
 
   return (
     <div className="food-item">
       <div className="food-item-container">
-        <img className="food-item-img" src={image} alt="image of food item" />
+        <img
+          className="food-item-img"
+          src={BASE_URL + "/food-images/" + image}
+          alt="image of food item"
+        />
         {!cartItems[id] ? (
           <img
             className="add"

@@ -15,10 +15,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// mounting the images from the static assets file in the front end
+// created the url route to the backend uploads page
 app.use(
   "/food-images",
-  express.static(path.join(__dirname, "../frontend/src/assets"))
+  express.static(path.join(__dirname, "../Backend/uploads"))
 );
 
 // Routes endpoints

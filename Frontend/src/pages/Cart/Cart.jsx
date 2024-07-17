@@ -11,6 +11,7 @@ const Cart = () => {
     addToCart,
     calcCartTotal,
     deliveryFee,
+    BASE_URL,
   } = useContext(ChewsterContext);
 
   const navigate = useNavigate();
@@ -28,11 +29,11 @@ const Cart = () => {
         <br />
         <hr />
         {food_list.map((item, idx) => {
-          if (cartItems[item._id] > 0) {
+          if (cartItems[item._id] && cartItems[item._id] > 0) {
             return (
               <div key={idx}>
                 <div className="cart-items-title cart-items-item">
-                  <img src={item.image} />
+                  <img src={`${BASE_URL}/food-images/` + item.image} />
                   <p>{item.name}</p>
                   <p>${item.price}</p>
                   <div className="item-counter-wrapper">

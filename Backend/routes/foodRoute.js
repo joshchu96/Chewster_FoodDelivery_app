@@ -13,7 +13,7 @@ const foodRouter = express.Router();
 const storage = multer.diskStorage({
   destination: "uploads",
   filename: (req, file, cb) => {
-    return cb(null, `${Date.now()}${file.originalname}`); //upload a file the timestamp will be uploaded in the file name.
+    return cb(null, `${file.originalname}`); //upload a file
   },
 });
 

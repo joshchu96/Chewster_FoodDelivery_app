@@ -54,9 +54,7 @@ const Login = ({ setShowLogin }) => {
           />
         </div>
         <div className="login-pop-inputs">
-          {state === "Log In" ? (
-            <></>
-          ) : (
+          {state === "Log In" ? null : (
             <>
               <label htmlFor="name">Name</label>
               <input

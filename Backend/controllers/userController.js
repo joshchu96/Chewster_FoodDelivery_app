@@ -29,7 +29,7 @@ const loginUser = async (req, res) => {
     const user = result.rows[0];
 
     if (!user) {
-      res.status(400).json({
+      return res.status(400).json({
         sucess: false,
         message: "User does not exist",
       });
@@ -43,13 +43,13 @@ const loginUser = async (req, res) => {
       });
     }
     const token = createToken(user);
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       token,
     });
   } catch (error) {
     console.log(error);
-    res.json({
+    return res.status(500).json({
       success: false,
       message: error.message,
     });

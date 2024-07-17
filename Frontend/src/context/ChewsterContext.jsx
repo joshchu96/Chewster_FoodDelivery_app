@@ -1,17 +1,16 @@
 import { createContext, useEffect, useState } from "react";
-
-import { food_list } from "../assets/assets";
+import axios from "axios";
 
 export const ChewsterContext = createContext(null);
 
 const ChewsterContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
-  const [foodList, setFoodList] = useState([]);
+  const [food_list, setFood_List] = useState([]);
 
   const BASE_URL = "http://localhost:4000";
   const [token, setToken] = useState("");
 
-  const addToCart = (itemId) => {
+  const addToCart = async (itemId) => {
     if (!cartItems[itemId]) {
       setCartItems((prevCartItems) => ({
         ...prevCartItems,
@@ -23,22 +22,53 @@ const ChewsterContextProvider = (props) => {
         [itemId]: prevCartItems[itemId] + 1,
       }));
     }
+    if (token) {
+      try {
+        const response = await axios.post(
+          `${BASE_URL}/chewster-api/cart/add`,
+          { itemId },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        console.log("Backend response:", response.data); //testing backend where the problem with connecting middleware is
+      } catch (error) {
+        console.error("Error adding to cart:", error);
+      }
+    }
   };
 
-  const removeFromCart = (itemId) => {
+  const removeFromCart = async (itemId) => {
     setCartItems((prevCartItems) => ({
       ...prevCartItems,
       [itemId]: prevCartItems[itemId] - 1,
     }));
+    if (token) {
+      try {
+        const response = await axios.post(
+          `${BASE_URL}/chewster-api/cart/remove`,
+          { itemId },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        console.log("Backend response:", response.data);
+      } catch (error) {
+        console.error("Error removing from cart:", error);
+      }
+    }
   };
 
   //calculate total cart amt
   const calcCartTotal = () => {
     let totalAmt = 0;
-    for (let item in cartItems) {
-      if (cartItems[item] > 0) {
-        let itemDetail = food_list.find((food) => food._id === item);
-        totalAmt += itemDetail.price * cartItems[item];
+    for (let itemId in cartItems) {
+      if (cartItems[itemId] > 0) {
+        let itemDetail = food_list.find((food) => food._id === Number(itemId));
+
+        if (itemDetail && typeof itemDetail.price === "number") {
+          totalAmt += itemDetail.price * cartItems[itemId];
+        } else {
+          console.error(
+            `Item ${itemId} not found in food_list or has invalid price`
+          );
+        }
       }
     }
     return totalAmt;
@@ -48,18 +78,32 @@ const ChewsterContextProvider = (props) => {
 
   const fetchFoodList = async () => {
     const response = await axios.get(BASE_URL + "/chewster-api/food/list");
-    setFoodList(response.data.data);
+    setFood_List(response.data.data);
   };
 
+  const fetchUserCart = async (token) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/chewster-api/cart/get`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.data.success) {
+        setCartItems(response.data.cartData);
+      }
+    } catch (error) {
+      console.error("Error fetching user cart:", error);
+    }
+  };
   useEffect(() => {
     async function loadData() {
       await fetchFoodList();
-      if (localStorage.getItem("token")) {
-        setToken(localStorage.getItem("token"));
+      const storedToken = localStorage.getItem("token");
+      if (storedToken) {
+        setToken(storedToken);
+        await fetchUserCart(storedToken);
       }
     }
     loadData();
-  }, []);
+  }, [token]);
 
   const contextValue = {
     food_list,
