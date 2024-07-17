@@ -1,6 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import "./PlaceOrder.css";
 import { ChewsterContext } from "../../context/ChewsterContext.jsx";
+import axios from "axios";
 
 const PlaceOrder = () => {
   const { calcCartTotal, deliveryFee, token, food_list, cartItems, BASE_URL } =
@@ -24,12 +25,38 @@ const PlaceOrder = () => {
     setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const placeOrder = async (e) => {
+    e.preventDefault();
+    //restructure to fit api format
+    let orderItems = [];
+    food_list.forEach((item) => {
+      if (cartItems[item._id] > 0) {
+        let itemInfo = { ...item, quantity: cartItems[item._id] };
+        orderItems.push(itemInfo);
+      }
+    });
+
+    let orderData = {
+      address: data,
+      items: orderItems,
+      amount: calcCartTotal() + 2,
+    };
+    //send order obj to stripe function
+    let response = await axios.post(
+      BASE_URL + "/chewster-api/order/place",
+      orderData,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    if (response.data.success) {
+      const { session_url } = response.data;
+      window.location.replace(session_url);
+    } else {
+      alert("Error");
+    }
+  };
 
   return (
-    <form action="" className="order-wrapper">
+    <form onSubmit={placeOrder} className="order-wrapper">
       <div className="order-left">
         <p className="title">Order Delivery Information</p>
         <div className="order-input-fields">
@@ -39,13 +66,15 @@ const PlaceOrder = () => {
             value={data.firstName}
             type="text"
             placeholder="First Name"
+            required
           />
           <input
-            name=" lastName"
+            name="lastName"
             onChange={handleOnChange}
             value={data.lastName}
             type="text"
             placeholder="Last Name"
+            required
           />
         </div>
         <input
@@ -54,6 +83,7 @@ const PlaceOrder = () => {
           value={data.email}
           type="email"
           placeholder="Email"
+          required
         />
         <input
           name="street"
@@ -61,6 +91,7 @@ const PlaceOrder = () => {
           value={data.street}
           type="text"
           placeholder="Street Address"
+          required
         />
         <div className="order-input-fields">
           <input
@@ -69,6 +100,7 @@ const PlaceOrder = () => {
             value={data.city}
             type="text"
             placeholder="City"
+            required
           />
           <input
             name="state"
@@ -76,17 +108,26 @@ const PlaceOrder = () => {
             value={data.state}
             type="text"
             placeholder="State"
+            required
           />
         </div>
         <div className="order-input-fields">
+          <input
+            name="zipcode"
+            onChange={handleOnChange}
+            value={data.zipcode}
+            type="text"
+            placeholder="Zip Code"
+            required
+          />
           <input
             name="country"
             onChange={handleOnChange}
             value={data.country}
             type="text"
-            placeholder="Zip Code"
+            placeholder="Country"
+            required
           />
-          <input type="text" placeholder="Country" />
         </div>
         <input
           name="phone"
@@ -94,6 +135,7 @@ const PlaceOrder = () => {
           value={data.phone}
           type="text"
           placeholder="Phone Number"
+          required
         />
       </div>
       <div className="order-right">
@@ -119,7 +161,7 @@ const PlaceOrder = () => {
                   : (calcCartTotal() + deliveryFee).toFixed(2)}
               </b>{" "}
             </div>
-            <button>Proceed to Payment</button>
+            <button type="submit">Proceed to Payment</button>
           </div>
         </div>
       </div>

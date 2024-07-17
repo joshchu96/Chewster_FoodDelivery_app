@@ -1,10 +1,8 @@
-import "../db.js";
+import db from "../db.js";
 import Stripe from "stripe";
 
-//create path to stripe
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-//place user order from Frontend
 const placeOrder = async (req, res) => {
   const frontendURL = "http://localhost:5173";
 
@@ -14,26 +12,23 @@ const placeOrder = async (req, res) => {
 
     const orderResult = await db.query(
       "INSERT INTO orders (user_id, items, amount, address) VALUES ($1, $2, $3, $4) RETURNING *",
-      [userId, items, amount, address]
+      [userId, JSON.stringify(items), amount, JSON.stringify(address)]
     );
 
     const newOrder = orderResult.rows[0];
 
-    //clear the users cart after adding the order.
-    //find the user info in db based on user id
     await db.query('UPDATE "user" SET cartdata = $1 WHERE id = $2', [
-      {},
+      JSON.stringify({}),
       userId,
     ]);
 
-    //create stripe payment
-    const line_items = req.body.items.map((item) => ({
+    const line_items = items.map((item) => ({
       price_data: {
         currency: "usd",
         product_data: {
           name: item.name,
         },
-        unit_amount: item.price * 100, //stripe prices are in cents so multiply by 100
+        unit_amount: Math.round(item.price * 100),
       },
       quantity: item.quantity,
     }));
@@ -44,7 +39,7 @@ const placeOrder = async (req, res) => {
         product_data: {
           name: "Delivery Charges",
         },
-        unit_amount: 2.99 * 100,
+        unit_amount: 299,
       },
       quantity: 1,
     });
@@ -52,20 +47,20 @@ const placeOrder = async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       line_items: line_items,
       mode: "payment",
-      success_URL: `${frontendURL}/verify?success=true&orderId=${newOrder.userId}`,
-      cancel_URL: `${frontendURL}/verify?success=false&orderId=${newOrder.userId}`,
+      success_url: `${frontendURL}/verify?success=true&orderId=${newOrder.id}`,
+      cancel_url: `${frontendURL}/verify?success=false&orderId=${newOrder.id}`,
     });
 
     res.json({
       success: true,
-      session_URL: session.url,
+      session_url: session.url,
     });
   } catch (error) {
     console.error("Error placing order:", error);
     res.status(500).json({
-      //return json message in the case the data has not been added and had an error.
       success: false,
-      error: "Error placing order",
+      error: error.message,
+      stack: error.stack,
     });
   }
 };

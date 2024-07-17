@@ -37,12 +37,12 @@ DROP TABLE IF EXISTS "orders";
 CREATE TABLE "orders" (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL,
-    items JSONB[] NOT NULL,
+    items JSONB NOT NULL,
     amount INTEGER NOT NULL,
     address JSONB NOT NULL,
     status VARCHAR(255) DEFAULT 'Food Order Processing...',
     date DATE DEFAULT CURRENT_DATE,
-    payment BOOLEAN DEFAULT FALSE
+    payment BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (user_id) REFERENCES "user"(id)
 );
 
