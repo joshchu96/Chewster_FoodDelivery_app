@@ -32,6 +32,20 @@ CREATE TABLE "user" (
     cartdata JSONB DEFAULT '{}'::jsonb
 );
 
+DROP TABLE IF EXISTS "orders";
+
+CREATE TABLE "orders" (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    items JSONB[] NOT NULL,
+    amount INTEGER NOT NULL,
+    address JSONB NOT NULL,
+    status VARCHAR(255) DEFAULT 'Food Order Processing...',
+    date DATE DEFAULT CURRENT_DATE,
+    payment BOOLEAN DEFAULT FALSE
+    FOREIGN KEY (user_id) REFERENCES "user"(id)
+);
+
 -- Insert food data
 INSERT INTO food (name, image, price, description, category) VALUES
 ('Greek salad', 'food_1.png', 12, 'Food provides essential nutrients for overall health and well-being', 'Salad'),
