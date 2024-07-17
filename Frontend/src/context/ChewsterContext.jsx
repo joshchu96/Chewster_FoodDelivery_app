@@ -6,6 +6,8 @@ export const ChewsterContext = createContext(null);
 
 const ChewsterContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
+  const [foodList, setFoodList] = useState([]);
+
   const BASE_URL = "http://localhost:4000";
   const [token, setToken] = useState("");
 
@@ -44,10 +46,19 @@ const ChewsterContextProvider = (props) => {
 
   const deliveryFee = 2.99;
 
+  const fetchFoodList = async () => {
+    const response = await axios.get(BASE_URL + "/chewster-api/food/list");
+    setFoodList(response.data.data);
+  };
+
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setToken(localStorage.getItem("token"));
+    async function loadData() {
+      await fetchFoodList();
+      if (localStorage.getItem("token")) {
+        setToken(localStorage.getItem("token"));
+      }
     }
+    loadData();
   }, []);
 
   const contextValue = {
