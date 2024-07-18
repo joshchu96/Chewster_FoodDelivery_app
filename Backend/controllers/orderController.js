@@ -65,4 +65,69 @@ const placeOrder = async (req, res) => {
   }
 };
 
-export { placeOrder };
+//verify if order has gone through stripe
+const verifyOrder = async (req, res) => {
+  const success = req.body.success;
+  const orderId = parseInt(req.body.orderId, 10);
+
+  try {
+    //update the payment status to true based on id
+    if (success == "true") {
+      const updateResult = await db.query(
+        'UPDATE "orders" SET payment = TRUE WHERE id=$1 RETURNING *',
+        [orderId]
+      );
+      console.log("Rows affected:", updateResult.rowCount);
+      if (updateResult.rowCount === 0) {
+        return res.status(404).json({
+          success: false,
+          message: "Payment failed",
+        });
+      }
+      const updatedOrder = updateResult.rows[0];
+      res.json({
+        success: true,
+        message: "Payment verified successfully",
+        order: updatedOrder,
+      });
+    } else {
+      // Handle the case where success is not "true"
+      res.json({
+        success: false,
+        message: "Payment verification failed",
+      });
+    }
+  } catch (error) {
+    console.error("Error verifying order:", error);
+    res.status(500).json({
+      success: false,
+      message: "Error verifying order",
+      error: error.message,
+    });
+  }
+};
+
+//orders for frontend handler
+const userOrders = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const orderResponse = await db.query(
+      "SELECT * FROM orders WHERE user_id = $1",
+      [userId]
+    );
+    const orders = orderResponse.rows;
+
+    res.status(200).json({
+      success: true,
+      orders: orders,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error: Failed to retrieve orders",
+      error: error.message,
+    });
+  }
+};
+
+export { placeOrder, verifyOrder, userOrders };

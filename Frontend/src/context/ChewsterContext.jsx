@@ -71,10 +71,8 @@ const ChewsterContextProvider = (props) => {
         }
       }
     }
-    return totalAmt;
+    return totalAmt || 0;
   };
-
-  const deliveryFee = 2.99;
 
   const fetchFoodList = async () => {
     const response = await axios.get(BASE_URL + "/chewster-api/food/list");
@@ -112,7 +110,6 @@ const ChewsterContextProvider = (props) => {
     addToCart,
     removeFromCart,
     calcCartTotal,
-    deliveryFee,
     BASE_URL,
     token,
     setToken,

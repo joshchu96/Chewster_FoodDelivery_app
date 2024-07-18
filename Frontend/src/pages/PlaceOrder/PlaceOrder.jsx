@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./PlaceOrder.css";
 import { ChewsterContext } from "../../context/ChewsterContext.jsx";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const PlaceOrder = () => {
-  const { calcCartTotal, deliveryFee, token, food_list, cartItems, BASE_URL } =
+  const { calcCartTotal, token, food_list, cartItems, BASE_URL } =
     useContext(ChewsterContext);
 
   const [data, setData] = useState({
@@ -39,7 +40,7 @@ const PlaceOrder = () => {
     let orderData = {
       address: data,
       items: orderItems,
-      amount: calcCartTotal() + 2,
+      amount: calcCartTotal(),
     };
     //send order obj to stripe function
     let response = await axios.post(
@@ -54,6 +55,16 @@ const PlaceOrder = () => {
       alert("Error");
     }
   };
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/cart");
+    } else if (calcCartTotal() === 0) {
+      navigate("/cart");
+    }
+  }, [token]);
 
   return (
     <form onSubmit={placeOrder} className="order-wrapper">
@@ -149,16 +160,13 @@ const PlaceOrder = () => {
             <hr />
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>${calcCartTotal() == 0 ? 0 : deliveryFee.toFixed(2)}</p>{" "}
+              <p>${calcCartTotal() > 0 ? "2.00" : "0.00"}</p>{" "}
             </div>
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
               <b>
-                $
-                {calcCartTotal === 0
-                  ? 0
-                  : (calcCartTotal() + deliveryFee).toFixed(2)}
+                ${calcCartTotal === 0 ? 0 : (calcCartTotal() + 2.0).toFixed(2)}
               </b>{" "}
             </div>
             <button type="submit">Proceed to Payment</button>

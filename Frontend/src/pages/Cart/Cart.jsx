@@ -10,7 +10,6 @@ const Cart = () => {
     removeFromCart,
     addToCart,
     calcCartTotal,
-    deliveryFee,
     BASE_URL,
   } = useContext(ChewsterContext);
 
@@ -65,21 +64,18 @@ const Cart = () => {
           <h2>Cart Summary</h2>
           <div className="cart-total-details">
             <p>Total before Fees</p>
-            <p>${calcCartTotal()}</p>
+            <p>${calcCartTotal().toFixed(2)}</p>
           </div>
           <hr />
           <div className="cart-total-details">
             <p>Delivery Fee</p>
-            <p>${calcCartTotal() === 0 ? 0 : deliveryFee}</p>
+            <p>${calcCartTotal() > 0 ? "2.00" : "0.00"}</p>
           </div>
           <hr />
           <div className="cart-total-details">
             <b>Total</b>
             <b>
-              $
-              {calcCartTotal === 0
-                ? 0
-                : (calcCartTotal() + deliveryFee).toFixed(2)}
+              ${(calcCartTotal() + (calcCartTotal() > 0 ? 2 : 0)).toFixed(2)}
             </b>
           </div>
           <button onClick={() => navigate("/order")}>
